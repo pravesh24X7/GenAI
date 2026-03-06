@@ -1,0 +1,25 @@
+First we'll learn about LLM's models and then ChatModels in langchain.
+After doing above things, we learn about EmbeddingModels in langchain.
+
+
+LLM's
+    OpenAI  (taught)
+
+    # rest all are homework
+    Anthropic
+    Google
+    HuggingFace
+
+For using OpenAI models first, create an API key from site: platform.openai.com
+ll_demo.py  file contains the code segment for OpenAI models.
+
+LL_demo_grok.py file conatins the working code, here we've used the ChatModel variant of Groq because LLM variant not available.
+
+Instead of using closed source models like GPT, Gemini, Claude, etc.
+we'll utilise open source models like LLaMA-2-7B, Mixtral-8x7B, etc.
+where to find open source models `HuggingFace`
+ways to use open source models 
+    running locally
+    use inference API provided by HuggingFace
+
+
