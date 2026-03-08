@@ -1,0 +1,43 @@
+In Day002, we learn about `Prompts` in Langchain.
+
+Prompts are basically input instructions informally known as queries which are given to LLM model.
+remember the line where you've create an object of LLM model and called the .invoke() method, here we're passing the prompt (or asking query) from the LLM, which the model will answer.
+
+2 types of prompts are there.
+    Text based prompts.
+    Multimodal prompts.
+
+In text based prompts, only queries in form of strings are passed to LLM models, and it will generate output for that.
+But in Multimodal prompts, along with string queries other form of input are also provided like images, videos, or audio, etc.
+
+In this tutorial, we learn more about Text based prompts, other kind of prompt is your homework task.
+We can create Text based prompts in 2 ways:
+    Static prompts: remains same every time
+        e.g.    `Write a poem on Cricket.`
+    Dynamic prompts: changes according to user needs.
+        e.g.    `Write a {task} on {topic}.`
+        now, user will decide, what task and topic will be, for example, task="summarize", topic="Football" or 
+        task="song", topic="Flowers".
+file `research_assistant.py` contains the code segment which demonstrate the static template learning.
+`dynamic_ra.py` and `template_generator.py` contains code of dynamic template learning. make sure you run template_generator.py file first then dynamic_ra.py for smoother workflow.
+
+Types of Messages in Langchain:
+    SystemMessage: usually passed in as the first of a sequence of input messages.
+    HumanMessage: message sent by user to LLM
+    AIMessage: message which LLM sent to user
+
+example:
+    For all questions which i'll ask, you've to answer only in 1 word.  (SystemMessage)
+    What is the capital of India?                                       (HumanMessage)
+    New Delhi                                                           (AIMessage)
+
+about .invoke() function, we can send list of message, or single message in string format.
+A dynamic message or static message.
+ChatPromptTemplate is used to send dynamic messages for list of message and PromptTemplate is used to send dynamic message for single string message.
+
+chat_prompt_template.py file contains the code segment which demonstrate the usage of ChatPromptTemplate,
+where SystemMessage are dynamic along with the HumanMessage and AIMessage.
+
+MessagePlaceholder: special placeholder used in ChatPromptTemplate to dynamically insert chat history or a list of messages at runtime.
+
+message_placeholder.py file contains the code segment that demonstrate the same.
