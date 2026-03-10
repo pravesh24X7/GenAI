@@ -1,0 +1,15 @@
+{
+    "name": null,
+    "input_variables": [
+        "sports"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\n    You are an experienced {sports} coach.\n    Answer the below given questions from {sports} perspective.\n\n    1. When did first match played?\n    2. Which 2 team played the first match?\n    3. How many players are there in each team?\n",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+}

@@ -1,0 +1,34 @@
+In this we learn about Structured output in langchain.
+we want our LLM model to communicate effectively with other services like API's, DB's, etc.
+just like they communicate with humans. So basically we're learning about how to process the output of LLM's.
+
+In langchain, Structured output referes to practice of having model to return responses in well-defined data format (like .json, .xml) rather than free form text. This makes model's output easier to parse and work with other programs.
+
+`with_structured_output` helps dealing with the output of LLM when response is generated in Structured format.
+whereas output parsers helps dealing with the response of LLM which is unstructured.
+
+in this we deal with with_structured_output function,
+there are total 3 ways to use this function.
+    using Typed Dict.
+    using Pydantic
+    and last json schema
+
+Typed Dict. is a way to define dict. in Python where you specify which keys and values should exists. It helps ensure that your dictionary should follow a specific structure.
+Remember: It does not validate data at runtime. meaning, if we define a variable of type string and store int or float values in it, the code will runs perfectly fine, no errors are generated.
+
+typed_dict.py file contains the code which demonstate the same.
+The code didn't worked because most of the models which work like this are either paid or work on subscription.
+
+Another technique is using Pydantic, it is data validation and data parsing lib. for python which ensures that data you passed is correct, structured, and type-safe.
+before using it, make sure pydantic is installed if not install it via `pip install pydantic`.
+using_pydantic.py contains the code for the same.
+
+last is json_schema technique. the output of this is python dict.
+
+Few things to remember:
+    with_structured_output() function has a parameter named as method
+        which holds 2 values, json_mode when output required is in json format.
+        function calling is used when you've to perform specfic task.
+
+OpenAI recommends to use function calling, whereas other model like Claude, Gemini suggests json_mode.
+some models which supports none of the above technique.
