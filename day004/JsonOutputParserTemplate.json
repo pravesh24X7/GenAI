@@ -1,0 +1,15 @@
+{
+    "name": null,
+    "input_variables": [
+        "format_instruction"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\n    Give me name, age and city of a fictional character \n\n    {format_instruction}\n",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+}

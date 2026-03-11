@@ -1,0 +1,22 @@
+Previously, we learned about Structured outputs using Pydantic, TypedDict and Json schemas. But this only works when the LLM model returns data in Structured output.
+
+In this we learn about the Output parsers, specifically those whose LLM models, which don't produce output in the desired format.
+Output parsers helps convert raw LLM outputs into structured format like JSON, CSV, Pydantic models and more.
+these can work with those models as well, which can give structured outputs.
+
+there are various types of Output parsers in langchain. we discuss 4 most frequent used output parsers here.
+    JsonOutputParser
+    StrOutputParser
+    StructureOutputParser
+    PydanticOutputParser
+
+StrOutputParser, this is the most easiest parsers in langchain. It's job is to convert the response of LLM into plain strings. while using this we don't have to explicitly extract .content from the response of LLM.
+str_output_parser_demo.py file contains the code demo.
+
+JsonOutputParser is the most frequent used parsers in the langchain while dealing with JSON.
+the issue while using this is that, we can't schema enforce the output JSON, meaning the structure of the JSON object is not decided by the end user, it is decided by the LLM itself.
+json_output_parser.file contains the demonstration of the same.
+
+StructureOutputParser is removed from langchain, the only difference in this and JsonOutputParser is that we can provide schema refer as ResponseSchema, basically the drawback of JsonOutputParser is fixed in StructureOutputParser.
+
+PydanticOutputParser in langchain uses Pydantic models to enforce schema validation when processing LLM responses.

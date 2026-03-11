@@ -1,0 +1,16 @@
+{
+    "name": null,
+    "input_variables": [
+        "format_instruction",
+        "place"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\n    Generate the name, age and city of the fictional {place} person. \n\n    Return ONLY a JSON object.\n    {format_instruction}\n",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+}
