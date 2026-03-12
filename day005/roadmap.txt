@@ -1,0 +1,7 @@
+We learn about chains in langchain
+
+What exactly a chain is?
+way of creating execution pipeline, not just sequential but parallel pipelines as well. We can even create conditional pipelines with ease.
+
+In this we learn about sequential, parallel and conditional chains.
+simpele_chain.py file contains code segment of sequential chain.

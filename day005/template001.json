@@ -1,0 +1,16 @@
+{
+    "name": null,
+    "input_variables": [
+        "domain",
+        "topic"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\n    You're expert of {domain}.\n\n    Explain {topic} in 5 lines.\n",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+}
