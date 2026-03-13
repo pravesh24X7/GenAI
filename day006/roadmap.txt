@@ -1,0 +1,17 @@
+concept of Runnables in langchain, Internally `chain` itself relies on Runnables for execution.
+The LLMChain concept is now deprecated in langchain, Instead of this new arch. is introducted
+
+Runnables + LCEL (langchain expression language)
+looks something like
+    chain = prompt | llm_model | parser
+
+Runnables are unit of work.
+    takes some input.
+    process the input
+    generates output.
+
+Each Runnables follows a common interface.
+    .invoke()
+    .batch()
+    .stream()
+    
