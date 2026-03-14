@@ -14,4 +14,24 @@ Each Runnables follows a common interface.
     .invoke()
     .batch()
     .stream()
-    
+
+Task Specific Runnables: core langchain components that have been converted into Runnables so they can be used in pipelines.
+examples: ChatOpenAI, PromptTemplate, Retriever
+
+Runnable Primitives: fundamental building block for structuring execution logic in AI workflows.
+examples: RunnableParallel, RunnableSequence, RunnableBranch, RunnableLambda, etc.
+
+Continue, the previous leftover, we begin with RunnableSequence: which helps in connecting 2 runnables together.
+Similar to RunnableSequence which helps in creating sequential chain, RunnableParallel helps in creating parallel chain.
+RunnablePassthrough: returns the input as output w/o modifying it.
+
+runnable_seq.py contains code segment that demonstrate RunnableSequence and RunnablePassthrough
+runnable_paralle.py contains code segment for RunnableParallel
+
+RunnableLambda: helps you to apply python function within AI pipeline.
+runnable_lambda.py contain code segment for the same.
+
+RunnableBranch: allows you to conditionally route input data to different chains or runnables based on custom logic.
+runnable_branch.py contains code for the same.
+
+RunnablePick allows selectively picks keys from a dictionary input. It allows you to specify one or more keys to extract from the input dictionary.

@@ -1,0 +1,16 @@
+{
+    "name": null,
+    "input_variables": [
+        "format_instruction",
+        "topic"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\n    Write a linkedIn post on {topic}. \n    Return the response in JSON format with key `post`.\n    \n {format_instruction}\n",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+}

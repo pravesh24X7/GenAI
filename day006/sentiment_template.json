@@ -1,0 +1,16 @@
+{
+    "name": null,
+    "input_variables": [
+        "comment",
+        "format_instruction"
+    ],
+    "optional_variables": [],
+    "output_parser": null,
+    "partial_variables": {},
+    "metadata": null,
+    "tags": null,
+    "template": "\n    Return the sentiment of below given comment.\n\n    {comment}.\n\n    Return the response in JSON format with key `sentiment`\n    \n\n    {format_instruction}\n",
+    "template_format": "f-string",
+    "validate_template": true,
+    "_type": "prompt"
+}
