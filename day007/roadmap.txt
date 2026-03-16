@@ -1,0 +1,36 @@
+Foundation of RAG based models using LLM's 
+RAG technique that combines information retrieval with language generation, where model retrieves relevant documents from knowledge base and uses them as context to generate accurate responses.
+
+Few important concepts which we've to learn before going forward.
+DocumentLoaders, TextSplitters, Vector DB's, Retrievers
+
+Most frequent used Document Loaders includes,
+TextLoader, PyPDFLoader, WebBaseLoader, CSVLoader
+
+DocumentLoader are components in langchain used to load data from various sources into a standardized format (usually Document object), which can later be used for chunking, embedding, retrieval, generation.
+
+First and very basic loader class is
+TextLoader which allows us to load text from (.txt) file and convert it into Document object.
+loader object returns the list of Documents after reading the file.
+txt_loader.py contains the code sample, where chatbot answer based on the content of uploaded file.
+
+PyPDFLoader document loader in langchain used to load content from PDF file and convert each page into Document object.
+make sure `pypdf` is installed in the system.
+pdf_loader.py contains the code segment for the same.
+
+Note: there are scenarios where this loader didn't works well, one example is when we've scanned images pdf, this will not work like expected. therefore, we've variety of pdf loaders in langchain. this most depends upon the use case.
+
+DirectoryLoader, used to load multiple documents from the directory.
+use lazy_load() fxn when there are huge no. of documents, unlike load() fxn which return the list of documents, this will return the generator Document object. recommended when dealing with stream of data.
+
+WebBaseLoader use to load and extract content from web pages. works well with static web pages.
+It uses bs4 to parse HTML. For JS heavy webpages this do not works well, use SeleniumURLLoader for that.
+
+HOMEWORK PROJECT: Create a chrome plugin, where the pages are loaded in realtime and behind the scene an api call is make with the specified URL and LLM model will answer all the queries.
+
+CSVLoader, to load .csv file into Document object.
+
+In langchain, we even have dataloader to load data from cloud providers, productivity tools, social media, etc.
+for more details refer documentation.
+
+We can also create Custom dataloader as well. basically you've to create a child class of BaseLoader class.
