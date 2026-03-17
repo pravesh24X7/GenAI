@@ -1,0 +1,18 @@
+TextSplitter in langchain
+
+Text splitting is a process of creating small chunks of given large text, so that it's is easy to manage.
+improve the quality of semantic search.
+short chunks yields more accurate vectors.
+prevents hallucincations and topic drift.
+
+4 types of TextSplitter are studied.
+    Length based
+    Text Structure based
+    Document Structure based
+    Semantic meaning based
+
+Text-Structure based splitting, here pre-defined seperators are used like 
+    \n\n        paragraph
+    \n          next line
+    _           word splitting
+    ""          split on the basis of characters.
