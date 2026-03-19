@@ -1,0 +1,15 @@
+Vector store: system designed to store and retrieve data represented as numerical vectors.
+README: How Vector store perform Indexing and Sematic search so quickly.
+
+Vector store Vs Vector DB's
+vectors store focuses on storing vectors and performing similarity search, Do not include traditional DB features.
+Usually recommended for small scale applications.
+
+Vector DB's provides additional DB features which includes:
+    Distributed system design
+    backup and recovery
+    ACID transactions
+    Concurrency
+    Authentication
+
+HOMEWORK: redo the same task for FAISS and Pinecone.
