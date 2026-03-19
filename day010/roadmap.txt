@@ -1,0 +1,44 @@
+Concept of retrievers:
+A retriever is a component that fetches relevant document from data source in response to user's query.
+all retriever in langchain are runnable.
+So basically it's like a search engine, that returns the relevant results.
+
+Types of retrievers:
+    Data source retriever
+        Wikipedia retriever
+        Vector store based retriever
+        Arxiv retriever
+    
+    Based on search category
+        MMR
+        Multi Query retriever
+        Contextual compression retriever
+
+First we learn about Data source retriever
+Wikipedia retriever: queries Wikipedia API to fetch relevant content for a given query.
+wiki_retrieve.py contains the code segment that demonstrate the same.
+
+Vector store retriever fetches document from a vector store based on semantic similarity using vector embeddings.
+vec_store_retrieve.py contains code segment for the same.
+
+Question: vector_store.similarity_search(query=query, k=1) does the same things as vector_store.as_retiever(search_kwargs={"k": 1}), then what is the need of 2 functions for same task.
+
+Answer: vector_store.similarity_search() fxn do not allows to use different search strategy whereas vector_store.as_retiever() fxn allows that.
+
+why MMR retriever?
+in regular similarity search, retrievers fetches the documents all very similar to each other and sometimes repeating the same information.
+MMR retriever avoids that:
+    picking the most relevant document first, then picking the next most relevant and least similar and repeat the same process.
+
+MultiQuery retriever, sometimes a single query might not capture all the ways information in phrased in your documents.
+what this does?
+    takes your query
+    uses LLM to generate multiple sentimental different version of that query.
+    performs retrieval for each sub-query.
+    combines and reduplicates the result.
+
+ContextualCompression retrieval, advance retriever that improves retrieval quality by compressing documents after retrieval keeping only the relevant content based on the user's query.
+How it works?
+    base retriever, which retriever top_K documents.
+    a compressor (LLM) is applied to each document. it keeps only the part relevant to the query.
+    irrelevant content is discarded.
