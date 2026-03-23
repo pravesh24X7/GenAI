@@ -1,0 +1,33 @@
+In this we learn about Tools in langchain
+
+How tools fit into Agent ecosystem?
+It allows to take action using tools. These tools are also runnables means, they've invoke function
+
+search_tool.py contains code segment that shows how LLM's perform searchs using tools.
+shell_tool.py contains code segment, this allows us to run commands using CLI and get results.
+
+How to create Custom tools in langchain?
+    you don't have builtin tools available.
+    you want to call your own API's.
+    when you want to encapsulate business logic.
+    you want LLM to interact with your DB, product, or app.
+
+Algo. for creating a tool (3 step process):
+    First create a fxn for tool with return type and datatypes and proper doc string.
+    Last add @tool decorator 
+
+Other techniques to create tools are:
+    using StructuredTool & Pydantic
+    using BaseTool class.
+
+custom_tool.py contains code segment for creating tools using @tool decorator.
+
+StructuredTool in langchain is a special type of tool where the input to the tool follows structured schema, defined as Pydantic model.
+custom_tool_st.py contains code segment for same.
+
+Creating custom tools using BaseTool class.
+It is an abstract class for all tools in langchain, It defines the core structure and interface that any tool must follow.
+base_tool.py contains code segment for same.
+
+Toolkit: collection of related tools that serves a common purpose.
+custom_toolkit.py contains code segment for the same.
