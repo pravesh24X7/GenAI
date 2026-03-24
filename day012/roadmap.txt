@@ -1,0 +1,7 @@
+Concept of tool binding
+process of registering a tool with LLM
+
+Note: not all LLM's has this capability of tool binding.
+Very important: LLM don't call any tool on behalf of programmer, it only suggest that `xyz` is helpful for solving this query and maually programmer has to call tools.
+
+tool execution
