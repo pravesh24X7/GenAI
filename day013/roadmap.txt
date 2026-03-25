@@ -1,0 +1,23 @@
+AI agents
+combo. of LLM + some tools,
+LLM has reasoning ability and tools given power to take actions.
+
+AI agents has following capabilities:
+    Goal-driven: you tell agent what you want not how you want it.
+    Autonomous planning: agent breaks down the problem and sequences tasks on its own.
+    Tool using: agent calls APIs, calculators and other tools.
+    Content aware: maintains memory across steps.
+    Adaptive: rethinks plan when thinks changes.
+
+basic_agent.py contains code segment which shows how AI agents are coded using langchains.
+
+ReAct: reasoning + acting
+design patterns used in AI agents, allows LLM to interleave internal reasoning and perform external actions.
+
+AgentExecutor orchestrates the entire loop.
+    sends input and previous message to agent.
+    gets the next action from agent.
+    executes that tool with provided input.
+    add's the tool observation back into history.
+    loops again with updated history.
+
