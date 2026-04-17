@@ -1,0 +1,93 @@
+Preference aligned fine tuning.
+Prerequisites: base_model => domain specific fine tuning => instruction fine tuning => (Current Step) Preference aligned fine tuning.
+
+import necessary lib's ...
+from transformers import AutoModelForCasualLM, AutoTokenizer
+from datasets import load_dataset
+from peft import get_peft_model, LoraConfig, TaskType
+
+base_model="base_model_name"	# don't mention the name of fine tuned model, specify the name of base model which used for fine-tuning, required to load the tokenizer.
+tokenizer = AutoTokenizer.from_pretrained(base_model)
+if tokenizer.pad_token is None:
+	tokenizer.pad_token = tokenizer.eos_token
+
+
+instruction_model_fine_tuned_path="instruction_fine_tuned_model_path"
+instruction_fine_tuned_model=AutoModelForCasualLM.from_pretrained(instruction_model_fine_tuned_path, device_map='auto')
+
+prompt = "Example query ..."
+inputs = tokenizer(prompt, return_tensors='pt').to('cuda')
+
+outputs = instruction_fine_tuned_model.generate(
+	**inputs,
+	max_new_tokens=100,
+	temperature=0.8,
+	top_p=0.9,
+	do_sample=True,
+	repetition_penalty=1.1)
+
+tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+# make sure to install trl and bitsandbytes using pip and restart the kernel.
+
+from trl import DPOTrainer	# used for RLHF, RLAIF
+import torch
+
+dataset = load_dataset("csv", data_files="preference_dataset_filepath.csv")
+
+# get_peft_model(): Creates a new LoRA during training.
+# PeftModel.from_pretrained():	Loads an already-trained LoRA for inference or further training.
+
+lora_config = LoraConfig(
+	task_type=TaskType.CASUAL_LM,
+	r=8,
+	lora_alpha=16,
+	lora_dropout=0.05,
+	target_modules=['q_proj', 'v_proj'],
+	bias="none",
+)
+
+# avoid LoRA stacking, instead use the below given approach.
+# step 1: load base model
+
+model0 = AutoModelForCasualLM.from_pretrained(
+	base_model,
+	load_in_8bit=True,
+	device_map="auto")
+
+# step 2: load instruction LoRA + merge
+model1 = PeftModel.from_pretrained(model0, instruction_model_fine_tuned_path)
+model1 = model1.merge_and_unload()
+
+# step 3: attach new LoRA preference.
+pref_model_lora = get_peft_model(model1, lora_config)
+
+# basically what we did:	BASE_MODEL + LoRA
+
+# begin with preference aligned training
+import os
+os.environ['WANDB_DISABLED']="true"
+
+from trl import DPOTrainer, DPOConfig
+
+dpo_args = DPOConfig(
+	output_dir="./preference_aligned_model",
+	learning_rate=2e-5,
+	per_device_batch_size=1,
+	gradient_accumulation_step=8,
+	num_train_epochs=5,
+	beta=0.1,
+	report_to=None,
+	logging_dir=None,
+	loss_type="sigmoid",
+	remove_unused_columns=False)
+
+trainer = DPOTrainer(
+	model=pref_model_lora,
+	args=dpo_args,
+	ref_model=None,
+	train_dataset=dataset,
+	processing_class=tokenizer)
+
+trainer.train()
+

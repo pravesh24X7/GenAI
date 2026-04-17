@@ -1,0 +1,148 @@
+Instruction Fine tuing on domain specific dataset:
+
+We are taking model which is previously fine tuned using unsupervised fine tuning.
+
+import necessary libs
+
+from transformers import AutoTokenizer, AutoModelForCasualLM, TrainingArguments, Trainer
+from peft import LoraConfig, get_peft_model, TaskType
+from dataset import load_dataset
+
+model_name=""
+
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+if tokenizer.pad_token is None:
+	tokenizer.pad_token = tokenizer.eos_token
+
+
+model_path=""
+non_instruction_model = AutoModelForCasualLM.from_pretrained(model_path, device_map="auto")
+prompts=""
+
+inputs=tokenizer(prompts, return_tensor="pt").to("cuda")
+outputs = non_instruction_model.generator(
+	**inputs,
+	max_new_tokens=100,
+	temperature=0.8,
+	top_p=0.5,
+	do_sample=True,
+	repetition_penatly=1.1
+)
+
+tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+# above code segment is testing part of unsupervised fine tuning.
+
+Instruction fine tuning begins.
+
+from datasets import load_dataset
+dataset = load_datasets("Amod/mental_heatlh_counseling_conversation", split="train")
+
+
+def format_row(example):
+	question = example["Context"]
+	answer = example["Response"]
+	example["Text"] = f"[Inst] {question} [/Response] {answer}"
+	return example
+
+
+formatted_dataset = dataset.map(format_row)
+formatted_dataset[0]["text"]
+
+create pandas dataframe 
+import pandas as pd
+
+df = pd.DataFrame(dataset)
+df.to_csv("filename.csv", index=False)
+df.to_json("filename.json", orient="records", lines=True)
+
+# now load the .csv dataset file
+from dataset import load_dataset
+
+dataset = load_dataset("csv", data_file="filename.csv")
+
+# in case of chatgpt and gemini, conversation dataset are used from quora, reddit, etc. like platforms.
+# for domain specfic purpose we've to create our own dataset and mix in ratio depend upon the domain, for healthcare domain we use 7:3 70% domain instruction and 30% general conversations.
+
+def format_example(example):
+	prompt = f"### Instruction: :\n{example['instruction']}.\n### Input: \n{example['input']}.\n### Response:\n{example['output']}\n."
+	return {"text": prompt}
+
+
+formatted_dataset = dataset.map(format_example, batched=True)
+
+formatted_dataset["text"][0]
+
+if tokenizer.pad_token is None:
+	tokenizer.pad_token = tokenizer.eos_token
+
+def tokenize_fxn(example):
+	tokens = tokenizer(example["text"], truncation=True, padding="max_length", max_length=512)
+	tokens['labels'] = tokens['input_ids'].copy()
+	return tokens
+
+
+def tokenize_and_mask(example):
+	text = example["text"]
+
+	# tokenize full text
+	enc = tokenizer(text, truncation=True, padding="max_length", max_length=512)
+	input_ids = enc['input_ids']
+
+	# find where `### Response:` starts
+	response_marker = "### Response:"
+	response_start = text.find(response_marker)
+
+	if response_start != -1:
+		# token index where response begins
+		response_token_start = len(tokenizer(text[:response_start])["input_ids"])
+	else:
+		response_token_start = 0	# if marker not found
+	
+	# clone labels and mask out everything before 'Response'
+	labels = input_ids.copy()
+	labels[:response_token_start] = [-100] * response_token_start
+	
+	enc['labels'] = labels
+	return enc
+
+
+
+tokenized_dataset = formatted_dataset.map(tokenize_fxn, batched=True)
+
+# LoRA Configurations
+from peft import LoraConfig, get_peft_model, TaskType
+
+lora_config = LoraConfig(
+		task_type=TaskType.CASUAL_LM,
+		r=8,
+		lora_alpha=16,
+		lora_dropout=0.05,
+		target_modules=['q_proj', 'v_proj'],
+		bias="none")
+
+model = get_peft_model(non_instruction_fine_tuned_model, lora_config)
+# define similar training args that we used in non_instruction_fine_tuning.
+
+trainer = Trainer(
+	model=model,
+	args=training_args,
+	train_dataset = tokenized_dataset)
+
+trainer.train()
+
+# testing the inference of SFT fine tuned model.
+instruction_fine_tuned_model = AutoModelForCasualLM.from_pretrained(model_path, device="auto")
+prompt = "Here goes input question ..."
+inputs = tokenizer(prompt, return_tokens="pt").to("cuda")
+outputs = instruction_fine_tuned_model.generate(
+	**inputs,
+	max_new_tokens=200,
+	temperature=0.8,
+	do_sample=True,
+	repetition_penalty=1.1)
+
+
+tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+

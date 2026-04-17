@@ -1,0 +1,117 @@
+NON Instruction Fine tuning base model.
+
+lib's required: transformers, datasets, accelerate, bitsandbytes, PEFT, trl	(transformers reinforcement learning).
+reasons:
+1. Transformers: 	core lib. to load, train and generate with 1000+ LLM's. without this fine-tuning is difficult.
+2. Datasets: 		simplifies dataset download, processing, streaming.
+3. accelerate: 		makes training scalable from 1 GPU to multiples.
+4. bitsandbytes:	Enables 8-bit and 4-bit quantization.
+5. PEFT:		framework for LoRA/QLoRA, prefix, adapter.
+
+install these using below given command
+pip install peft, transformers, bitsandbytes, accelerate, datasets, trl, PyMuPDF # for handling pdfs.
+
+our own custom data (non instruction data) for domain specific fine tuning.
+import fitz
+
+def extract_text_from_pdf(pdf_file):
+	text_blocks=[]
+	with fitz.open(pdf_file) as doc:
+		for page in doc:
+			text = page.get_text('text').strip()
+			if text:
+				text_blocks.append(text)
+	
+	return text_blocks
+
+
+pdf_texts = extract_text_file_pdf("file.pdf")
+
+# series to step to follow with raw data.
+1. Data collection
+2. cleaning / filtering
+3. splitting / chunking
+4. tokenization
+5. training
+
+# perform chunking, divide the data into paragraphs.
+# search on google for the same.
+# once all the paragraphs are extracted. run below given code segment which converts the list of paragraphs into dataset object.
+
+dataset = Dataset.from_list(paragraphs)
+
+# now it's time for fine-tuning
+# begin with selecting a model which fits into google colab free tier resources.
+model_name=""
+
+from transformers import AutoTokenizer, AutoModelForCasualLM, Trainer, TrainingArguments, DataCollectorForLanguageModeling
+
+# after performing chunking it's time to tokenize the data
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+# below given code is done to perform padding with <eos> token
+if tokenizer.pad_token is None:
+	tokeneizer.pad_token = tokenizer.eos_token
+
+def tokenize(example):
+	tokens = tokenizer(example['text'].truncation=True, padding='max_length', max_length=512)
+	tokens['labels'] = tokens['input_ids'].copy()
+	return tokens
+
+"""
+In the above code segment, 
+example["text"] = each entry in dataset object
+	this looks something like
+	{
+		"text": mitrochondria is power house of the cell.
+	}
+
+tokenization tokens.
+	truncation=True	# this means if text is longer than max_length, cut of it.
+	padding="max_length" # if text shorter than 512 than add padding tokens.
+	max_length=512 # fixed sequence length per training examples.
+
+input_ids:[0, 1, 5, 7, 9, 15, ...] attention_mask: [0, 0, 1, 1, 1, 0]
+
+tokens['labels'] = tokens['input_ids'].copy()
+this is the key step for casual (unsupervised) language modeling. It means, the model should try to predict the next token of this same sequence.
+
+so model learns: given previous words, predict the next word.
+
+output:
+	{
+		"input_ids": []
+		"attention_mask": [],
+		"labels": []
+	}
+"""
+
+
+# perform mapping
+tokenized_data = dataset.map(tokenize, batched=True, remove_columns=["text"]) # here we remove the "text" from the output we only required, input_ids, attention_mask, labels.
+
+# training arguments configuration
+training_args = TrainingArguments(
+	output_dir=f"{model_name}/domain-specific",	# in which output directory to save the models.
+	overwrite_output_dir=True,			# allow overwrite, to avoid folder conflicts.
+	num_train_epochs=2,				# training cycles,
+	per_device_train_batch_size=2,			# batch per GPU, affects speed and memory
+	save_steps=500,					# save frequency
+	save_total_limit=2,				# keep last N models.
+	logging_steps=50,				# log every X steps for progress monitoring
+	learning_rate=2e-5,				# Weight update rate
+	fp16=True,					# mixed precision, faster + less memory.
+	report_to="none"				# logging destination
+)
+
+trainer = Trainer(
+	model=model_name,
+	args=training_args,
+	train_dataset=tokenized_data)
+
+trainer.train()
+
+# NOTE: above written code segment will not work. because it is full fine tuning approach. In another words we're try training the whole model from scratch.
+In the next we learn about both the fine tuning approachs.
+1. OLD School method for fine tuning.
+2. LoRA/QLoRA

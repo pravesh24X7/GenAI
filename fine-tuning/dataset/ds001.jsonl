@@ -1,0 +1,158 @@
+{"text": "blood group classification using hybrid transformer xai and fedavg technique pravesh srivastava1* and ravi saharan2 1*computer science and engineering, central university of rajasthan, ajmer, 305817, india"}
+{"text": "in; abstract blood group identification plays an important role in medical diagnostics as it helps in safe blood transfusion"}
+{"text": "these conventional method is accurate but time consuming and impractical in urgent conditions or resources are limited"}
+{"text": "in recent years, machine learning and deep learning techniques are explored to automate the classification tasks"}
+{"text": "also most models are black box models which makes even more difficult to understand how model predictions are generated"}
+{"text": "this proposed work provides an optimal approach for classifying blood groups with the help of fingerprint images using hybrid transformer model specifically swin transformer with efficientnet (cnn), here cnn efficientnet model effectively captures the texture and fine details, whereas transformer model swin which uses attention mechanism focus on global contextual relationships"}
+{"text": "in addition to these x-ai techniques also implemented using grad-cam to visualize important regions that influence model\u2019s decisions"}
+{"text": "the proposed work presents a complete framework for performance, interpretability and privacy learning for blood group classification"}
+{"text": "1 introduction accurate identification of blood group plays an important role, since the consequences of this are significant, whether it\u2019s blood transfusion, organ transplant or emergency medical situations"}
+{"text": "classifying the blood group with the help of fingerprints makes it accurate and reliable as fingerprints are fundamental biometric features, uniquely identifying individuals through patterns formed by ridges and valleys on their fingertips"}
+{"text": "these patterns are developed in the early birth stage of individual and remains unchanged throughout the life making them a reliable means"}
+{"text": "beyond these basic patterns fingerprints also contains minutiae points such as bifurcations, ridge endings, islands which adds additional uniqueness to individual fingerprint"}
+{"text": "there are several studies that shows the correlation between these fingerprint patterns and certain blood group types"}
+{"text": "the dataset we used consist of eight abo types (a+, a-, b+, b-, o+, o-, ab+, ab-) blood group fingerprints"}
+{"text": "by utilizing the effectiveness of deep learning models specifically cnn and transformer, we can effectively capture these features and make the prediction reliable"}
+{"text": "the cnn identifies intricate fingerprint patterns by learning features from ridge endings, bifurcations, and minutiae points in the image while transformer can focus on distinct regions in an image also referred as global features using it\u2019s attention mechanism which can improve feature representation"}
+{"text": "even though both approaches are effective alone, using only one not capturing the information needed for accurate classification"}
+{"text": "keeping performance is important, many medical ai systems lacks interpretability as most of the models are black boxes, meaning the operator can not easily understand how decision are made"}
+{"text": "in this work, gradient weighted class activation mapping (grad-cam) is used to generate heatmaps that highlights image regions that are influencing model decision"}
+{"text": "this data is sensitive and are not shared publicly which makes it difficult to collect large datasets"}
+{"text": "federated learning provides solution to this problem by allowing models to train over multiple local datasets without transferring raw data"}
+{"text": "the author introduced a non-invasive way to identify blood groups through fingerprint images, concentrating on the textures and patterns"}
+{"text": "the author suggested to use an automated blood group identification system based on image processing for non-invasive antigen 2"}
+{"text": "the author introduced a system called blood snap for detecting blood groups using image processing techniques"}
+{"text": "in their study, blood samples were captured as images and analyzed using image-based feature extraction methods to classify different blood groups"}
+{"text": "however, the model did not make use of deep learning techniques or advanced optimization methods, which limited the improvement of accuracy"}
+{"text": "[4] focuses on a new way of identifying blood groups using fingerprint images with the help of deep learning techniques"}
+{"text": "in this study, convolutional neural networks (cnns) were used to learn and analyze unique fingerprint patterns"}
+{"text": "since fingerprints are easy to collect and do not require blood samples, this method aims to provide a fast and non-invasive option compared to traditional blood testing methods"}
+{"text": "in their work, pre-trained deep learning models such as alexnet and lenet-5 were used to classify fingerprint images"}
+{"text": "the study highlights the potential of combining biometrics and deep learning for blood group identification and provides a foundation for further research in this area"}
+{"text": "the model was trained using different fingerprint patterns with the aim of predicting the blood group of an individual without using blood samples"}
+{"text": "the results of the study showed that the proposed deep learning model achieved a moderate accuracy"}
+{"text": "the author proposed an automatic system for identifying blood groups along with a notification alert feature"}
+{"text": "in their work, image processing techniques were used to analyze blood sample images and determine the blood group"}
+{"text": "once the blood group was detected, the system could send alerts or notifications to inform the users"}
+{"text": "by combining blood group detection with an alert system, the proposed approach helps in faster communication and better efficiency"}
+{"text": "in their study, around 600 images of blood samples collected from different laboratories were used for analysis"}
+{"text": "the authors applied techniques such as clahe for image enhancement, otsu\u2019s thresholding for segmentation, and various matlab-based tools to process the images"}
+{"text": "blood group classification was mainly done by detecting clumps in the blood samples, separating rgb color components, and counting objects present in the images"}
+{"text": "[9] presented a new method to predict abo blood groups using fingerprint images with the help of a convolutional neural network (cnn)"}
+{"text": "in their work, the authors designed and optimized a cnn model to study fingerprint patterns and relate them to blood groups"}
+{"text": "this approach avoids the need for blood samples, making the process simple, quick, and non-invasive compared to traditional methods"}
+{"text": "[10] carried out a study to predict blood groups using fingerprint features with the help of machine learning methods"}
+{"text": "in their work, techniques such as multiple linear regression using the ols method and gabor filters were used to analyze fingerprint images"}
+{"text": "the study was conducted on a dataset of 82 students, where important fingerprint features like minutiae points, ridge count, 3"}
+{"text": "in their research, they created a clear classification that shows different ways these pre-trained models can be adjusted and used in a federated setup"}
+{"text": "they explained how such models can be fine-tuned or adapted when the training data is spread across many devices instead of being stored in one place"}
+{"text": "the study concluded that using foundational models with federated learning can help the model perform better on new data, while still protecting user privacy"}
+{"text": "in their study, they compared two main types of approaches: model-agnostic methods, which can be used with any model, and model-specific methods, which are designed for a particular model type"}
+{"text": "they explained how these techniques are applied in different areas, such as visual explanations for image-based models, text-based explanations for nlp systems, and counterfactual explanations that show what changes in input could lead to a different prediction"}
+{"text": "in the end, the paper pointed out the existing gaps in evaluating explainable ai methods and suggested possible directions for improving research in this field"}
+{"text": "[13]conducted review on deep federated learning, focusing specifically on deep neural networks which are trained in federated environment"}
+{"text": "in their work, they studied how to use this approach in different fields such as health centers, computer vision, nlp, etc"}
+{"text": "at the end author concluded that federated learning given good performance in many applications and also suggested that future work focus on faster model convergence and lower communication overhead"}
+{"text": "this works by creating a simple and easily interpretable model around a single prediction of complex model"}
+{"text": "they tested lime on variety of tasks such as text classification and image recognition and showed that even complex black box models can interpreted this way, without loosing any performance of the model"}
+{"text": "[15] conducted review of research on federated learning and its use in areas like healthcare, iot, finance, and smart systems"}
+{"text": "in their study, they explained how federated learning makes it possible for different users or organizations to train a shared model without sending their raw data to a central server"}
+{"text": "the authors highlighted that better and more adaptive aggregation methods are needed so that the global model can perform well even when client datasets are very different from each other"}
+{"text": "[16] studied federated learning by looking at it from the angle of multi-party computation (mpc) and secure joint training"}
+{"text": "the authors also grouped federated learning systems into three main types: centralized, decentralized, and hierarchical architectures"}
+{"text": "with federated learning, the chances of data leakage during model updates can be reduced to a large extent"}
+{"text": "[17] conducted a comparative study of opensource federated learning frameworks such as tff (tensorflow federated), pysyft and flower"}
+{"text": "in their study, comparitive study is based on scalability, flexibility, convenience and communication at deployment time"}
+{"text": "they also compared other federated learning development frameworks to understand practical issues during deployment and concluded that major challenges are communication and non-iid data when dealing with federated learning"}
+{"text": "[19] studied hfl which stands for hetrogeneous federated learning, where different clients has different data distribution, model sturcture and computing capacity"}
+{"text": "in their work, because of the differences in data, device and computation, training global model becomes complex"}
+{"text": "the author grouped hfl into three different categories which includes data level solution, model level solution and system level solution and concluded that proper handling of statistical and system hetrogenity is crucial to make federated systems reliable, scalable, and efficient for practical scenarios"}
+{"text": "the author tested many explanation methods on synthetic and real world problems and concluded that no single xai technique performs best in every situation, thus usage of an explanation method depends upon the task and needs"}
+{"text": "they further suggested the importance of standard benchmarks to properly measure how effective and meaningful interpretability methods"}
+{"text": "in their work, they worked on two types of approaches which are post-hoc methods and intrinsic methods"}
+{"text": "they reviewed xai techniques that are used in different tasks like classification, clustering and deep learning applications"}
+{"text": "the author also discussed different ways to evaluate explanation and gaps in measuring how useful these explanations are"}
+{"text": "they also addresses how xai is applied in different areas and concluded that interpretability is more important in real world applications"}
+{"text": "this framework is based on ideas from game theory and is used to explain complex machine learning models"}
+{"text": "in their work, they used shapley values from cooperative game theory to calculate how much each feature contributes to a specific prediction"}
+{"text": "the authors tested shap on different types of models, such as gradient boosting trees and deep neural networks"}
+{"text": "1 data collection in this study, we used finger print blood group dataset publicly available on kaggle"}
+{"text": "it consists of fingerprint images categorized into eight blood group classes: a+, a, b+, b-, ab+, ab-, o+ and o-"}
+{"text": "the dataset was organized into two folders for training and testing while developing model and evaluation results"}
+{"text": "in this, the number of samples is not exactly the same for all blood group classes"}
+{"text": "this difference can make the model focus more on the classes with higher samples and ignore the smaller ones"}
+{"text": "in this method, higher importance is given to the classes with fewer samples, and lower importance is given to the classes with more samples"}
+{"text": "as a result, the model learns in a more balanced way and improves its performance for minority classes as well"}
+{"text": "2 data preprocessing for each fingerprint image, the following preprocessing steps are applied sequentially, and numeric features are extracted: 1"}
+{"text": "2 shows the result of an experiment where we compared two cnn modes these are resnet and efficientnet with four transformer models which includes swin, vit, deit, cait, for finding out the best hybrid model"}
+{"text": "all these models are finetuned for 30 epochs with early stopping and final results is swin alone able to achieve the 90% of validation accuracy and early stopped at epoch 19 outperforming all the other models behind it efficientnet model performed the best with validation accuracy of 88% early stopped at epoch 24, which helps in identifying the final hybrid fusion model combo using efficientnet with swin transformer, rest all the models scored less than these models"}
+{"text": "but resnet50 gives a tough competition to efficientnetb3 model but not able to achieve as good accuracy as efficientnetb3 making it the best choice"}
+{"text": "4 proposed work the proposed approach utilizes a hybrid model for blood group classification using fingerprint images"}
+{"text": "the main idea behind this approach is that different techniques capture different types of features, and combining them can improve the overall classification performance"}
+{"text": "instead of relying solely on raw image pixels, we define a multimodal feature representation as: f = [fcnn, fswin, fnum] where: \u2022 fcnn represents deep convolutional features, \u2022 fswin represents transformer-based global features, \u2022 fnum represents handcrafted numerical fingerprint features"}
+{"text": "the job of the classifier is to learn a mapping, which increases the representation capacity of the model"}
+{"text": "formally, this can be expressed as: g(f) \u2192y where f is the multimodal feature representation and y is the predicted blood group label"}
+{"text": "1 cnn branch cnn branch is based on the efficientnet model and is responsible for learning the spatial hierarchy of features"}
+{"text": "the early layers detect edges and ridges, the middle layers detect local patterns, and the deep layers capture complex fingerprint patterns"}
+{"text": "mathematically, convolution is defined as: y (i, j) = x m x n x(i \u2212m, j \u2212n) k(m, n) where k is the convolution kernel"}
+{"text": "this produces a 96-dimensional feature vector, computed as: fcnn = 1 h \u00d7 w h x i=1 w x j=1 m(i, j) where h and w are the height and width of the feature map m"}
+{"text": "2 swin branch the proposed model uses swin transformer, which leverages the attention mechanism, while the first branch of the hybrid model uses cnn, which works on convolution 8"}
+{"text": "mathematically, self-attention is computed as: attention(q, k, v ) = softmax \u0012qk\u22a4 \u221adk \u0013 v the attention mechanism allows the swin transformer to capture relationships between distant regions of a fingerprint image"}
+{"text": "the transformer output is then projected to a 256-dimensional vector, representing high-level structural information: fswin \u2208r256 3"}
+{"text": "3 numeric branch along with the deep learning features extracted from cnn and swin transformer branches, fingerprint analysis methods are used to extract additional handcrafted features from each training image"}
+{"text": "4 latent encoding the extracted handcrafted features are passed through an encoder network, and the auto-encoder learns a lower-dimensional latent representation of these features"}
+{"text": "5 feature fusion and classification layer the fusion of 96 cnn features, 256 transformer features, and 128 encoded numeric features produces a 480-dimensional representation"}
+{"text": "the final concatenated features are input into a fully connected classifier and class weights are applied to handle imbalance classification along with cross-entropy loss function"}
+{"text": "the classifier operations can be written as: h = gelu (w1ffusion + b1) \u02c6y = softmax (w2h + b2) the cross-entropy loss: l = \u2212 c x i=1 yi log \u02c6yi where: \u2022 ffusion is the 480-dimensional concatenated feature vector, \u2022 w1, w2 are the weight matrices, \u2022 b1, b2 are the bias, \u2022 h is the hidden representation after gelu activation, \u2022 c is the number of classes, \u2022 yi and \u02c6yi are the predicted probabilities for class i"}
+{"text": "5 training pipeline the fingerprint dataset is organized in a directory-based structure, where each blood group is represented by a separate folder"}
+{"text": "for each training sample, the following components are calculated: \u2022 img eff: image tensor for the cnn branch \u2022 img swin: image tensor for the transformer branch \u2022 numeric feat: numeric feature vector \u2022 label: class index 10"}
+{"text": "two different image preprocessing pipeline are applied because cnn and transformer takes inputs of different dimensions"}
+{"text": "table 1: transformations for cnn and swin branch transformation efficientnet swin resize 300\u00d7300 224\u00d7224 horizontal flip 0"}
+{"text": "5 rotation \u00b110 \u00b110 the feature vector created while preprocessing data is scaled using a pretrained scaler and converted into tensor and this tensor is later passed to the hybrid model as the numeric input branch"}
+{"text": "this cnn branch processes the 300 \u00d7 300 resized image, and the final convolution feature map is passed through convolution, batch normalization, and average pooling layers"}
+{"text": "the output embedding is passed through a linear layer, layer normalization, and gelu activation to produce the img swin vector of 256 dimensions"}
+{"text": "the outputs from all three branches are concatenated and fused into a single 480-dimensional vector: ffusion = [img eff \u2295img swin \u2295numeric feat] \u2208r480 the classifier consists of a linear layer, gelu activation, and dropout layer"}
+{"text": "frozen backbone training: in this stage, the backbones of efficientnet and swin are frozen, and only the classifier and numeric layers are trained for 12 epochs"}
+{"text": "partial fine-tuning: in this stage, the last stage of the swin transformer is trained with a smaller learning rate for 30 epochs"}
+{"text": "for evaluating the model\u2019s discriminative capability, roc curve analysis was performed using a one-vs-rest strategy for all eight blood group classes"}
+{"text": "the roc curve is generated by plotting the true positive rate (tpr) against the false positive rate (fpr) at different decision thresholds"}
+{"text": "0 indicates perfect separability between the target class and the remaining classes, meaning the model can effectively differentiate positive samples from negative samples"}
+{"text": "3 shows that the model achieves high sensitivity while maintaining an extremely low false positive rate across all classes"}
+{"text": "4 represents the models confusion matrix, where most of samples are correctly predicted which shows the reliability of the model"}
+{"text": "4 xai integration to uncover the black box of deep learning models and understand how decision are made by the hybrid model, gradient weight class activation mapping (grad-cam) 12"}
+{"text": "in our work, grad-cam is implemented on cnn branch, specifically on the final convolution feature map before global average pooling and ig implemented on swin by accumulating gradients"}
+{"text": "1 grad-cam on cnn for a given fingerprint image first forward pass is performed through hybrid model, the predicted blood group score is selected and gradients of particular class are computed with respect to the final cnn feature maps"}
+{"text": "a weighted sum is also calculated and relu activation is applied to keep only positive regions"}
+{"text": "finally, heatmap is superimposed on the original fingerprint image, which produces a visual explanation showing the regions that contributes the most in prediction"}
+{"text": "5 represents heatmap shows highlighted regions in warm colors (red/yellow) and less important regions in cool color (blue)"}
+{"text": "in our experiment, grad-cam visualization showed that model primarily focus on core ridge structures, minutiae-dense region and central fingerprint patterns"}
+{"text": "although final decision based on cnn, swin and numeric features, grad-cam analysis shows cnn captures local ridge details"}
+{"text": "unlike grad-cam which is limited to convolution layers, ig can explain transformer based models like swin"}
+{"text": "it measures how much each input feature contributes in prediction by accumulating gradients along a path from baseline input to actual input"}
+{"text": "as we know, swin uses self-attention instead of convolution operation thus grad-cam is not reliable for full transformer explanation"}
+{"text": "instead of using single gradient, it integrates gradients over multiple small steps n step=50 in our implementation"}
+{"text": "although the cnn branch provides clear spatial localization using grad-cam, interpretability of the swin branch is comparatively less localized"}
+{"text": "cnns maintain explicit spatial feature maps, the swin uses window-based selfattention and hierarchical patch merging, which distribute importance across multiple regions"}
+{"text": "it is important to clarify that comparative lower localization clarity in transformer explanation, transformer are inherently more difficult to interpret because attention weights are not always equal to feature importance, multiple attention heads contributes in prediction process, hierarchical merging alters spatial mapping"}
+{"text": "centralized training requires collecting all fingerprint images into a single server, which increases the risk of privacy leakage"}
+{"text": "the federated system consist of a central server, multiple clients and hybrid model as base architecture"}
+{"text": "each client contains raw fingerprint images, numeric feature extraction pipeline, copy of the hybrid model, local optimizer, and training routine"}
+{"text": "each client trains locally and returns updated weights to the server, where aggregation is performed to update the global model"}
+{"text": "update model weights using backpropagation after local training, the updated model weights are sent to the server"}
+{"text": "the server aggregates client weights using weighted averaging: wglobal = k x k=1 nk n wk where, wk is the weights from client k, nk is the number of samples available to client k, n is the total samples, and k is the total clients"}
+{"text": "this will ensures that those clients which has more data contribute proportionally more to the global update"}
+{"text": "since the cnn and swin backbones are partially frozen, most updates occur in the projection layers, numeric branch, and classifier layer"}
+{"text": "training achieves 99% of centralized accuracy while ensuring data privacy, with convergence in under five rounds"}
+{"text": "remains competitive while preserving data privacy, convergence is more sensitive compared to centralized training, and model divergence is possible if client updates vary significantly"}
+{"text": "6 conclusion and furture scope in this work, a hybrid deep learning framework was proposed for fingerprint-based blood group classification"}
+{"text": "this hybrid strategy allows the model to capture local structural patterns along with global contextual information, which leads to an overall validation accuracy of \u224893%"}
+{"text": "integrating xai along with federated learning technique strengthens the model by providing visual evidence of features and ensure that sensitive fingerprint data remains decentralized which makes overall system reliable for practical use cases"}
+{"text": "although the proposed hybrid model achieves good validation accuracy but still, a larger and mnore diverse dataset is still suggested for imporoving the generalization ability of model"}
+{"text": "for xai point of view swin transformer capture contextual information, its interpretability is still limited when compared to cnn"}
+{"text": "in addition, adaptive federated optimization methods can be explored for faster convergence on non-iid data distribution"}
+{"text": "in: proceedings of the fifth international conference on advances in electrical, computing, communication and sustainable technologies (icaect), pp"}
+{"text": ": automated blood group detection system using image processing for non-invasive antigen feature extraction and classification"}
+{"text": "in: proceedings of the 3rd international conference on intelligent data communication technologies and internet of things (idciot), pp"}
+{"text": "in: proceedings of the ieee 4th international conference on ict in business industry & government (ictbig), pp"}
+{"text": ": a novel approach for abo blood group prediction using fingerprint through optimized convolutional neural network"}
+{"text": "in: proceedings of the 22nd acm sigkdd international conference on knowledge discovery and data mining, pp"}
