@@ -1,0 +1,5 @@
+Learning parallel workflows using LangGraph
+
+We create 2 parallel workflows
+    1. Non LLM based workflow
+    2. LLM based workflow
