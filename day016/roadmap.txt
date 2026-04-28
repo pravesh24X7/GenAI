@@ -1,0 +1,6 @@
+Learn about Conditional workflows in langgraph
+
+It's like the IF-ELSE of langgraph.
+We discuss 2 workflows here, 
+    1. NON LLM based workflow
+    2. LLM based workflow: customer support workflow
