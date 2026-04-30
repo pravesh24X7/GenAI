@@ -1,0 +1,24 @@
+persistence in langgraph, referes to the ability to save and restore the state of a workflow over time.
+It not only store the final_state values but also store the intermediate values of the state.
+
+    Helps in following scenarions:
+        1. Fault tolerance.
+        2. Chatbots
+
+Checkpointers in Persistence:
+    what this does is, divides the whole execution of graphs into checkpoints, and then for each checkpoint saves the values of state.
+    so basically, we've to divide the graph into checkpoints 
+            each super-step of graph becomes the checkpoints, In other words, for example while moving from the START node to node1 (this is referred as the super-step.), if there are parallel workflows they all are merged and referred as a 1 single workflow.
+    
+    while executing the graph, all the checkpoint values are save all the values (both intermediate and final) into a DB.
+
+
+Threads in checkpoints
+    Each time we execute our workflow, we assign a new thread_id, so that later we can fetch the values more specific to workflow.
+
+Benefits of persistence:
+    1. Short term memory
+        
+    2. Fault tolerance
+    3. Human In the Loop (HITL)
+    4. Time travel.
